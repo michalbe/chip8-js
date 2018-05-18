@@ -6,6 +6,7 @@ const rom = new Rom({
 });
 
 const chip8 = new Chip8();
+
 rom.load().then((program) => {
     console.log(program);
     chip8.load_program(program);
