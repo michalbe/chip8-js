@@ -1,3 +1,7 @@
+import { Renderer } from './renderer';
+
+const renderer = new Renderer();
+
 export class Chip8 {
     constructor() {
         this.display = {
@@ -38,6 +42,9 @@ export class Chip8 {
         // clear display
         this.display.content = new Array(this.display.width * this.display.height).fill(0);
 
+        this.delayTimer = 0;
+        this.soundTimer = 0;
+
     }
 
     start() {
@@ -45,13 +52,14 @@ export class Chip8 {
             this.tick();
 
             if (this.is_drawing) {
-                console.clear();
+                // console.clear();
                 // self.renderer.render(self.display);
-                console.log(this.display.content);
+                // console.log(this.display.content);
+                renderer.draw(this.display.content);
                 this.is_drawing = false;
             }
 
-        }, 1000);
+        }, 6);
     }
 
     transform_pixel(x, y) {
@@ -83,7 +91,7 @@ export class Chip8 {
 
     tick() {
         const opcode = this.memory[this.pc] << 8 | this.memory[this.pc + 1];
-        console.log(opcode);
+        // console.log(opcode);
         let x = (opcode & 0x0F00) >> 8;
         let y = (opcode & 0x00F0) >> 4;
         const instruction = opcode & 0xf000;
