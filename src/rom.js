@@ -1,6 +1,6 @@
 
 const defaults = {
-    path: 'roms/invaders.rom'
+    path: ''
 };
 
 export class Rom {
@@ -9,7 +9,7 @@ export class Rom {
     }
 
     load() {
-        return fetch(this.patch)
+        return fetch(this.options.path)
         .then((response) => {
             return response.arrayBuffer();
         })
