@@ -7,7 +7,7 @@ import livereload from 'rollup-plugin-livereload'
 export default {
   entry: 'src/main.js',
   format: 'umd',
-  moduleName: 'chip8-js',
+  moduleName: 'chip8',
   plugins: [
     commonjs({
       include: 'node_modules/**',
