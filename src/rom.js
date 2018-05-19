@@ -14,7 +14,7 @@ export class Rom {
             return response.arrayBuffer();
         })
         .then((buffer) => {
-            this.program = buffer;
+            this.program = new Uint8Array(buffer);
             return this.program;
         });
     }
