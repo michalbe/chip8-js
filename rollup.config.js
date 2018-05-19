@@ -24,5 +24,5 @@ export default {
       watch: ['dist']
     })
   ],
-  dest: 'index.js'
+  dest: 'dist/index.js'
 }
