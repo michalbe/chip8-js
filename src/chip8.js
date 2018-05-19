@@ -59,7 +59,7 @@ export class Chip8 {
                 this.is_drawing = false;
             }
 
-        }, 6);
+        }, 10);
     }
 
     transform_pixel(x, y) {
