@@ -114,9 +114,9 @@ export class Chip8 {
 
             case 0x1000: this.cpu.JP(opcode); break;
             case 0x2000: this.cpu.CALL(opcode); break;
-            case 0x3000: this.cpu.SE(opcode); break;
+            case 0x3000: this.cpu.SE(opcode, (opcode & 0xFF)); break;
             case 0x4000: this.cpu.SNE(opcode); break;
-            case 0x5000: this.cpu.SE2(opcode); break;
+            case 0x5000: this.cpu.SE(opcode, this.v[y]); break;
 
             // LD Vx, byte
             // 6xkk
