@@ -127,4 +127,12 @@ export class CPU {
             this.chip8.v[x] -= 256;
         }
     }
+
+    SNE2(opcode) {
+        const { x, y } = this.get_x_y(opcode);
+
+        if (this.chip8.v[x] != this.chip8.v[y]) {
+            this.chip8.pc += 2;
+        }
+    }
 }

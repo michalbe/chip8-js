@@ -136,14 +136,7 @@ export class Chip8 {
 
                 break;
 
-            // SNE Vx, Vy
-            // 9xy0
-            // Skip next instruction if Vx is not equal to Vy.
-            case 0x9000:
-                if (this.v[x] != this.v[y]) {
-                    this.pc += 2;
-                }
-                break;
+            case 0x9000: this.cpu.SNE2(opcode); break;
 
             // LD I, addr
             // Annn
