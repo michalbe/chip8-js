@@ -11,4 +11,8 @@ export class CPU {
         this.chip8.sp--;
         this.chip8.pc = this.chip8.stack[this.chip8.sp];
     }
+
+    JP(opcode) {
+        this.chip8.pc = opcode & 0xFFF;
+    }
 }

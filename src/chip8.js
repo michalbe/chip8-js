@@ -115,9 +115,7 @@ export class Chip8 {
             // JP addr
             // 1nnnn
             // Jump to location nnn
-            case 0x1000:
-                this.pc = opcode & 0xFFF;
-                break;
+            case 0x1000: this.cpu.JP(opcode); break;
 
             // CALL addr
             // 2nnnn
