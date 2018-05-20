@@ -172,4 +172,20 @@ export class CPU {
         }
         this.chip8.is_drawing = true;
     }
+
+    SKP(opcode) {
+        const x = this.get_x_y(opcode).x;
+
+        if (this.chip8.keys[this.chip8.v[x]]) {
+            this.chip8.pc += 2;
+        }
+    }
+
+    SKPN(opcode) {
+        const x = this.get_x_y(opcode).x;
+
+        if (!this.chip8.keys[this.chip8.v[x]]) {
+            this.chip8.pc += 2;
+        }
+    }
 }

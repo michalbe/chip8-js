@@ -17,6 +17,8 @@ export class Chip8 {
         this.cpu = new CPU({
             chip8: this
         });
+
+        this.keys = {};
     }
 
     load_program(program) {
@@ -50,6 +52,19 @@ export class Chip8 {
         this.delayTimer = 0;
         this.soundTimer = 0;
 
+        this.keys = {};
+    }
+
+    active_key(key) {
+        this.keys[key] = true;
+    }
+
+    inactive_key(key) {
+        this.keys[key] = false;
+    }
+
+    set_key_state(key, status) {
+        this.keys[key] = status;
     }
 
     start() {
@@ -145,25 +160,8 @@ export class Chip8 {
             case 0xE000:
                 switch (opcode & 0x00FF) {
 
-                    // SKP Vx
-                    // Ex9E
-                    // Skip next instruction if the key with the value Vx is pressed.
-                    case 0x009E:
-                        console.log('0x009E');
-                        // if (this.keys[this.v[x]]) {
-                        //     this.pc += 2;
-                        // }
-                        break;
-
-                    // SKNP Vx
-                    // ExA1
-                    // Skip  next instruction if the key with the value Vx is NOT pressed.
-                    case 0x00A1:
-                        console.log('0x00A1');
-                        // if (!this.keys[this.v[x]]) {
-                        //     this.pc += 2;
-                        // }
-                        break;
+                    case 0x009E: this.cpu.SKP(opcode); break;
+                    case 0x00A1: this.cpu.SKPN(opcode); break;
 
                 }
 
