@@ -122,7 +122,7 @@ export class Chip8 {
             // 6xkk
             // Set Vx equal to kk.
             case 0x6000:
-                this.v[x] = opcode & 0xFF;
+                this.cpu.LD(opcode, (opcode & 0xFF));
                 break;
 
             // ADD Vx, byte

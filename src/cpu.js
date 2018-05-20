@@ -37,4 +37,10 @@ export class CPU {
             this.chip8.pc += 2;
         }
     }
+
+    LD(opcode, value) {
+        const x = (opcode & 0x0F00) >> 8;
+
+        this.chip8.v[x] = value;
+    }
 }
