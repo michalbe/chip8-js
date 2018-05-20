@@ -107,4 +107,24 @@ export class CPU {
         this.chip8.v[0xF] = this.chip8.v[x] & 0x1;
         this.chip8.v[x] >>= 1;
     }
+
+    SUBN(opcode) {
+        const { x, y } = this.get_x_y(opcode);
+
+        this.chip8.v[0xF] = +(this.chip8.v[y] > this.chip8.v[x]);
+        this.chip8.v[x] = this.chip8.v[y] - this.chip8.v[x];
+        if (this.chip8.v[x] < 0) {
+            this.chip8.v[x] += 256;
+        }
+    }
+
+    SHL(opcode) {
+        const { x, y } = this.get_x_y(opcode);
+
+        this.chip8.v[0xF] = +(this.chip8.v[x] & 0x80);
+        this.chip8.v[x] <<= 1;
+        if (this.chip8.v[x] > 255) {
+            this.chip8.v[x] -= 256;
+        }
+    }
 }

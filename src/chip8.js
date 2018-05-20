@@ -130,30 +130,8 @@ export class Chip8 {
                     case 0x0004: this.cpu.ADD2(opcode); break;
                     case 0x0005: this.cpu.SUB(opcode); break;
                     case 0x0006: this.cpu.SHR(opcode); break;
-
-                    // SUBN Vx, Vy
-                    // 8xy7
-                    // Set Vx equal to Vy - Vx, set Vf equal to NOT borrow.
-                    case 0x0007:
-                        this.v[0xF] = +(this.v[y] > this.v[x]);
-                        this.v[x] = this.v[y] - this.v[x];
-                        if (this.v[x] < 0) {
-                            this.v[x] += 256;
-                        }
-                        break;
-
-
-                    // SHL Vx, Vy
-                    // 8xyE
-                    // Set Vx equal to Vx SHL 1.
-                    case 0x000E:
-                        this.v[0xF] = +(this.v[x] & 0x80);
-                        this.v[x] <<= 1;
-                        if (this.v[x] > 255) {
-                            this.v[x] -= 256;
-                        }
-                        break;
-
+                    case 0x0007: this.cpu.SUBN(opcode); break;
+                    case 0x000E: this.cpu.SHL(opcode); break;
                 }
 
                 break;
