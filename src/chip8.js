@@ -129,14 +129,7 @@ export class Chip8 {
                     case 0x0003: this.cpu.XOR(opcode); break;
                     case 0x0004: this.cpu.ADD2(opcode); break;
                     case 0x0005: this.cpu.SUB(opcode); break;
-
-                    // SHR Vx, Vy
-                    // 8xy6
-                    // Set Vx SHR 1.
-                    case 0x0006:
-                        this.v[0xF] = this.v[x] & 0x1;
-                        this.v[x] >>= 1;
-                        break;
+                    case 0x0006: this.cpu.SHR(opcode); break;
 
                     // SUBN Vx, Vy
                     // 8xy7

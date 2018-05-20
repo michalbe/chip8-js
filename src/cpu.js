@@ -100,4 +100,11 @@ export class CPU {
             this.chip8.v[x] += 256;
         }
     }
+
+    SHR(opcode) {
+        const { x, y } = this.get_x_y(opcode);
+
+        this.chip8.v[0xF] = this.chip8.v[x] & 0x1;
+        this.chip8.v[x] >>= 1;
+    }
 }
