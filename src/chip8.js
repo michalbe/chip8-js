@@ -112,19 +112,8 @@ export class Chip8 {
 
                 break;
 
-            // JP addr
-            // 1nnnn
-            // Jump to location nnn
             case 0x1000: this.cpu.JP(opcode); break;
-
-            // CALL addr
-            // 2nnnn
-            // Call subroutine at nnnn.
-            case 0x2000:
-                this.stack[this.sp] = this.pc;
-                this.sp++;
-                this.pc = opcode & 0x0FFF;
-                break;
+            case 0x2000: this.cpu.CALL(opcode); break;
 
             // SE Vx, byte
             // 2xkk

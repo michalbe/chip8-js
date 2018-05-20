@@ -15,4 +15,10 @@ export class CPU {
     JP(opcode) {
         this.chip8.pc = opcode & 0xFFF;
     }
+
+    CALL(opcode) {
+        this.chip8.stack[this.chip8.sp] = this.chip8.pc;
+        this.chip8.sp++;
+        this.chip8.pc = opcode & 0x0FFF;
+    }
 }
