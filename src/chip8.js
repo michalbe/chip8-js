@@ -49,8 +49,8 @@ export class Chip8 {
         // clear display
         this.display.content = new Array(this.display.width * this.display.height).fill(0);
 
-        this.delayTimer = 0;
-        this.soundTimer = 0;
+        this.delay_timer = 0;
+        this.sound_timer = 0;
 
         this.keys = {};
     }
@@ -171,13 +171,7 @@ export class Chip8 {
 
                 switch (opcode & 0x00FF) {
 
-                    // LD Vx, DT
-                    // Fx07
-                    // Place value of DT in Vx.
-                    case 0x0007:
-                        console.log('0x0007');
-                        // this.v[x] = this.delayTimer;
-                        break;
+                    case 0x0007: this.cpu.LD_DT(opcode); break;
 
                     // LD Vx, K
                     // Fx0A

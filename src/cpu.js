@@ -188,4 +188,9 @@ export class CPU {
             this.chip8.pc += 2;
         }
     }
+
+    LD_DT(opcode) {
+        const x = this.get_x_y(opcode).x;
+        this.chip8.v[x] = this.chip8.delay_timer;
+    }
 }
