@@ -43,4 +43,15 @@ export class CPU {
 
         this.chip8.v[x] = value;
     }
+
+    ADD(opcode) {
+        const x = (opcode & 0x0F00) >> 8;
+        let val = (opcode & 0xFF) + this.chip8.v[x]
+
+        if (val > 255) {
+            val -= 256;
+        }
+
+        this.chip8.v[x] = val;
+    }
 }

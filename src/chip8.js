@@ -117,26 +117,8 @@ export class Chip8 {
             case 0x3000: this.cpu.SE(opcode, (opcode & 0xFF)); break;
             case 0x4000: this.cpu.SNE(opcode); break;
             case 0x5000: this.cpu.SE(opcode, this.v[y]); break;
-
-            // LD Vx, byte
-            // 6xkk
-            // Set Vx equal to kk.
-            case 0x6000:
-                this.cpu.LD(opcode, (opcode & 0xFF));
-                break;
-
-            // ADD Vx, byte
-            // 7xkk
-            // Set Vx equal to Vx + kk.
-            case 0x7000:
-                var val = (opcode & 0xFF) + this.v[x]
-
-                if (val > 255) {
-                    val -= 256;
-                }
-
-                this.v[x] = val;
-                break;
+            case 0x6000: this.cpu.LD(opcode, (opcode & 0xFF)); break;
+            case 0x7000: this.cpu.ADD(opcode); break;
 
             case 0x8000:
 
