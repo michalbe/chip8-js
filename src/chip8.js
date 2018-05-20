@@ -127,24 +127,8 @@ export class Chip8 {
                     case 0x0001: this.cpu.OR(opcode); break;
                     case 0x0002: this.cpu.AND(opcode); break;
                     case 0x0003: this.cpu.XOR(opcode); break;
-
-                    // ADD Vx, Vy
-                    // 8xy4
-                    // Set Vx equal to Vx + Vy, set Vf equal to carry.
-                    case 0x0004:
-                        this.cpu.ADD2(opcode);
-                        break;
-
-                    // SUB Vx, Vy
-                    // 8xy5
-                    // Set Vx equal to Vx - Vy, set Vf equal to NOT borrow.
-                    case 0x0005:
-                        this.v[0xF] = +(this.v[x] > this.v[y]);
-                        this.v[x] -= this.v[y];
-                        if (this.v[x] < 0) {
-                            this.v[x] += 256;
-                        }
-                        break;
+                    case 0x0004: this.cpu.ADD2(opcode); break;
+                    case 0x0005: this.cpu.SUB(opcode); break;
 
                     // SHR Vx, Vy
                     // 8xy6

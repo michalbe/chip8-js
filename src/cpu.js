@@ -3,6 +3,13 @@ export class CPU {
         this.chip8 = chip8;
     }
 
+    get_x_y(opcode) {
+        return {
+            x: (opcode & 0x0F00) >> 8,
+            y: (opcode & 0x00F0) >> 4
+        }
+    }
+
     CLS() {
         this.chip8.display.content.fill(0);
     }
@@ -23,7 +30,7 @@ export class CPU {
     }
 
     SE(opcode, value) {
-        const x = (opcode & 0x0F00) >> 8;
+        const x = this.get_x_y(opcode).x;
 
         if (this.chip8.v[x] === value) {
             this.chip8.pc += 2;
@@ -31,7 +38,7 @@ export class CPU {
     }
 
     SNE(opcode) {
-        const x = (opcode & 0x0F00) >> 8;
+        const x = this.get_x_y(opcode).x;
 
         if (this.chip8.v[x] != (opcode & 0x00FF)) {
             this.chip8.pc += 2;
@@ -39,7 +46,7 @@ export class CPU {
     }
 
     LD(opcode, value) {
-        const x = (opcode & 0x0F00) >> 8;
+        const x = this.get_x_y(opcode).x;
 
         this.chip8.v[x] = value;
     }
@@ -56,29 +63,25 @@ export class CPU {
     }
 
     OR(opcode) {
-        const x = (opcode & 0x0F00) >> 8;
-        const y = (opcode & 0x00F0) >> 4;
+        const { x, y } = this.get_x_y(opcode);
 
         this.chip8.v[x] |= this.chip8.v[y];
     }
 
     AND(opcode) {
-        const x = (opcode & 0x0F00) >> 8;
-        const y = (opcode & 0x00F0) >> 4;
+        const { x, y } = this.get_x_y(opcode);
 
         this.chip8.v[x] &= this.chip8.v[y];
     }
 
     XOR(opcode) {
-        const x = (opcode & 0x0F00) >> 8;
-        const y = (opcode & 0x00F0) >> 4;
+        const { x, y } = this.get_x_y(opcode);
 
         this.chip8.v[x] ^= this.chip8.v[y];
     }
 
     ADD2(opcode) {
-        const x = (opcode & 0x0F00) >> 8;
-        const y = (opcode & 0x00F0) >> 4;
+        const { x, y } = this.get_x_y(opcode);
 
         this.chip8.v[x] += this.chip8.v[y];
         this.chip8.v[0xF] = +(this.chip8.v[x] > 255);
@@ -89,8 +92,7 @@ export class CPU {
     }
 
     SUB(opcode) {
-        const x = (opcode & 0x0F00) >> 8;
-        const y = (opcode & 0x00F0) >> 4;
+        const { x, y } = this.get_x_y(opcode);
 
         this.chip8.v[0xF] = +(this.chip8.v[x] > this.chip8.v[y]);
         this.chip8.v[x] -= this.v[y];
