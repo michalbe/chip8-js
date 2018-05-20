@@ -59,7 +59,7 @@ export class Chip8 {
                 this.is_drawing = false;
             }
 
-        }, 10);
+        }, 0);
     }
 
     transform_pixel(x, y) {
@@ -108,7 +108,7 @@ export class Chip8 {
                     // CLear the display.
                     case 0x00E0:
                         // this.renderer.clear();
-                        this.display.content
+                        this.display.content.fill(0);
                         break;
 
                     // RET
