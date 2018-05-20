@@ -114,29 +114,9 @@ export class Chip8 {
 
             case 0x1000: this.cpu.JP(opcode); break;
             case 0x2000: this.cpu.CALL(opcode); break;
-
-            // SE Vx, byte
-            // 2xkk
-            // Skip next instruction if vX equals kk.
             case 0x3000: this.cpu.SE(opcode); break;
-
-            // SNE Vx, byte
-            // 4xkk
-            // Skip next instruction if vX doesn't equal kk.
-            case 0x4000:
-                if (this.v[x] != (opcode & 0x00FF)) {
-                    this.pc += 2;
-                }
-                break;
-
-            // SE Vx, Vy
-            // 5xy0
-            // Skip next instruction if vX equals vY.
-            case 0x5000:
-                if (this.v[x] === this.v[y]) {
-                    this.pc += 2;
-                }
-                break;
+            case 0x4000: this.cpu.SNE(opcode); break;
+            case 0x5000: this.cpu.SE2(opcode); break;
 
             // LD Vx, byte
             // 6xkk

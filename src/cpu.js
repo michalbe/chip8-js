@@ -29,4 +29,21 @@ export class CPU {
             this.chip8.pc += 2;
         }
     }
+
+    SNE(opcode) {
+        const x = (opcode & 0x0F00) >> 8;
+
+        if (this.chip8.v[x] != (opcode & 0x00FF)) {
+            this.chip8.pc += 2;
+        }
+    }
+
+    SE2(opcode) {
+        const x = (opcode & 0x0F00) >> 8;
+        const y = (opcode & 0x00F0) >> 4;
+
+        if (this.chip8.v[x] === this.chip8.v[y]) {
+            this.chip8.pc += 2;
+        }
+    }
 }
