@@ -135,4 +135,41 @@ export class CPU {
             this.chip8.pc += 2;
         }
     }
+
+    LD2(opcode) {
+        this.chip8.i = opcode & 0xFFF;
+    }
+
+    JP2(opcode) {
+        this.chip8.pc = (opcode & 0xFFF) + this.chip8.v[0];
+    }
+
+    RND(opcode) {
+        const { x, y } = this.get_x_y(opcode);
+
+        this.chip8.v[x] = ~~(Math.random() * 0xFF) & (opcode & 0xFF)
+    }
+
+    DRW(opcode) {
+        const { x, y } = this.get_x_y(opcode);
+
+        this.chip8.v[0xF] = 0;
+        var height = opcode & 0x000F;
+        var registerX = this.chip8.v[x];
+        var registerY = this.chip8.v[y];
+        var x1, y1, spr;
+
+        for (y1 = 0; y1 < height; y1++) {
+            spr = this.chip8.memory[this.chip8.i + y1];
+            for (x1 = 0; x1 < 8; x1++) {
+                if ((spr & 0x80) > 0) {
+                    if (this.chip8.transform_pixel(registerX + x1, registerY + y1)) {
+                        this.chip8.v[0xF] = 1;
+                    }
+                }
+                spr <<= 1;
+            }
+        }
+        this.chip8.is_drawing = true;
+    }
 }
