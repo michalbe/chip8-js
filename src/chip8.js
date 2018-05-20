@@ -132,11 +132,7 @@ export class Chip8 {
                     // 8xy4
                     // Set Vx equal to Vx + Vy, set Vf equal to carry.
                     case 0x0004:
-                        this.v[x] += this.v[y];
-                        this.v[0xF] = +(this.v[x] > 255);
-                        if (this.v[x] > 255) {
-                            this.v[x] -= 256;
-                        }
+                        this.cpu.ADD2(opcode);
                         break;
 
                     // SUB Vx, Vy
