@@ -54,4 +54,11 @@ export class CPU {
 
         this.chip8.v[x] = val;
     }
+
+    OR(opcode) {
+        const x = (opcode & 0x0F00) >> 8;
+        const y = (opcode & 0x00F0) >> 4;
+
+        this.chip8.v[x] |= this.chip8.v[y];
+    }
 }

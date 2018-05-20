@@ -123,20 +123,8 @@ export class Chip8 {
             case 0x8000:
 
                 switch (opcode & 0x000f) {
-
-                    // LD Vx, Vy
-                    // 8xy0
-                    // Stores register Vy in Vx
-                    case 0x0000:
-                        this.v[x] = this.v[y];
-                        break;
-
-                    // OR Vx, Vy
-                    // 8xu1
-                    // Set vX equal to vX OR Vy;
-                    case 0x0001:
-                        this.v[x] |= this.v[y];
-                        break;
+                    case 0x0000: this.cpu.LD(opcode, this.v[y]); break;
+                    case 0x0001: this.cpu.OR(opcode); break;
 
                     // AND Vx, Vy
                     // 8xy2
