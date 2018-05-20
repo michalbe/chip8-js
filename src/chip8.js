@@ -125,20 +125,8 @@ export class Chip8 {
                 switch (opcode & 0x000f) {
                     case 0x0000: this.cpu.LD(opcode, this.v[y]); break;
                     case 0x0001: this.cpu.OR(opcode); break;
-
-                    // AND Vx, Vy
-                    // 8xy2
-                    // Set Vx equal to Vx AMD Vy
-                    case 0x0002:
-                        this.v[x] &= this.v[y];
-                        break;
-
-                    // XOR Vx, Vy
-                    // 8xy3
-                    // Set Vx equal to Vx XOR Vy.
-                    case 0x0003:
-                        this.v[x] ^= this.v[y];
-                        break;
+                    case 0x0002: this.cpu.AND(opcode); break;
+                    case 0x0003: this.cpu.XOR(opcode); break;
 
                     // ADD Vx, Vy
                     // 8xy4
