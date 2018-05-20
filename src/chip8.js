@@ -118,11 +118,7 @@ export class Chip8 {
             // SE Vx, byte
             // 2xkk
             // Skip next instruction if vX equals kk.
-            case 0x3000:
-                if (this.v[x] === (opcode & 0xFF)) {
-                    this.pc += 2;
-                }
-                break;
+            case 0x3000: this.cpu.SE(opcode); break;
 
             // SNE Vx, byte
             // 4xkk

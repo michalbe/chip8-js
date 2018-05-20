@@ -21,4 +21,12 @@ export class CPU {
         this.chip8.sp++;
         this.chip8.pc = opcode & 0x0FFF;
     }
+
+    SE(opcode) {
+        const x = (opcode & 0x0F00) >> 8;
+
+        if (this.chip8.v[x] === (opcode & 0xFF)) {
+            this.chip8.pc += 2;
+        }
+    }
 }
