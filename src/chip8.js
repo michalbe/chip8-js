@@ -1,4 +1,5 @@
 import { Renderer } from './renderer';
+import { CPU } from './cpu';
 
 const renderer = new Renderer();
 
@@ -12,6 +13,10 @@ export class Chip8 {
 
         this.memory = window.memory = new Uint8Array(new ArrayBuffer(0x1000));
         this.reset();
+
+        this.cpu = new CPU({
+            chip8: this
+        });
     }
 
     load_program(program) {
@@ -63,9 +68,8 @@ export class Chip8 {
     }
 
     transform_pixel(x, y) {
-        var location,
-            width = this.display.width,
-            height = this.display.height;
+        const width = this.display.width;
+        const height = this.display.height;
 
         // If the pixel exceeds the dimensions,
         // wrap it back around.
@@ -81,7 +85,7 @@ export class Chip8 {
             y += height;
         }
 
-        location = x + (y * width);
+        const location = x + (y * width);
 
         this.display.content[location] ^= 1;
 
@@ -91,7 +95,6 @@ export class Chip8 {
 
     tick() {
         const opcode = this.memory[this.pc] << 8 | this.memory[this.pc + 1];
-        // console.log(opcode);
         let x = (opcode & 0x0F00) >> 8;
         let y = (opcode & 0x00F0) >> 4;
         const instruction = opcode & 0xf000;
@@ -103,21 +106,8 @@ export class Chip8 {
             case 0x0000:
 
                 switch (opcode) {
-                    // CLS
-                    // OOE0
-                    // CLear the display.
-                    case 0x00E0:
-                        // this.renderer.clear();
-                        this.display.content.fill(0);
-                        break;
-
-                    // RET
-                    // 00EE
-                    // Return from subroutine.
-                    case 0x00EE:
-                        this.pc = this.stack[--this.sp];
-                        break;
-
+                    case 0x00E0: this.cpu.CLS(); break;
+                    case 0x00EE: this.cpu.RET(); break;
                 }
 
                 break;
