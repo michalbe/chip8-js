@@ -1,14 +1,17 @@
 import { Rom } from './rom';
 import { Chip8 } from './chip8';
+import { Renderer } from './renderer';
+
+const renderer = new Renderer();
 
 const rom = new Rom({
     path: 'roms/invaders.rom'
 });
 
-const chip8 = new Chip8();
+const chip8 = new Chip8({ renderer });
 
 rom.load().then((program) => {
-    console.log(program);
     chip8.load_program(program);
     chip8.start();
 });
+

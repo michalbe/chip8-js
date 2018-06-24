@@ -1,13 +1,12 @@
-import { Renderer } from './renderer';
-// import { Renderer } from './renderer-ascii';
 import { CPU } from './cpu';
-
-const renderer = new Renderer();
 
 const key_maps = '1234qwerasdfzxcv'.split('');
 
 export class Chip8 {
-    constructor() {
+    constructor({ renderer }) {
+
+        this.renderer = renderer;
+
         this.display = {
             width: 64,
             height: 32,
@@ -99,10 +98,7 @@ export class Chip8 {
             this.tick();
 
             if (this.is_drawing) {
-                // console.clear();
-                // self.renderer.render(self.display);
-                // console.log(this.display.content);
-                renderer.draw(this.display.content);
+                this.renderer.draw(this.display.content);
                 this.is_drawing = false;
             }
 
@@ -118,8 +114,6 @@ export class Chip8 {
         const width = this.display.width;
         const height = this.display.height;
 
-        // If the pixel exceeds the dimensions,
-        // wrap it back around.
         if (x > width) {
             x -= width;
         } else if (x < 0) {
@@ -218,7 +212,7 @@ export class Chip8 {
                 break;
 
             default:
-                throw new Error("Unknown opcode " + opcode.toString(16) + " passed. Terminating.");
+                console.log(`Unknown opcode: ${opcode}!`);
         }
     }
 }

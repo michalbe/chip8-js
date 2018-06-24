@@ -15,7 +15,6 @@ export class Rom {
         })
         .then((buffer) => {
             this.program = new Uint8Array(buffer);
-            console.log(this.program.length/2);
             return this.program;
         });
     }
