@@ -193,4 +193,20 @@ export class CPU {
         const x = this.get_x_y(opcode).x;
         this.chip8.v[x] = this.chip8.delay_timer;
     }
+
+    LD_Vx(opcode) {
+        // not implemented
+        console.log('Not implmented');
+    }
+
+    LD_DT2(opcode) {
+        const x = this.get_x_y(opcode).x;
+        this.chip8.delay_timer = this.chip8.v[x];
+    }
+
+    ADD_Vx(opcode) {
+        const x = this.get_x_y(opcode).x;
+
+        this.chip8.i += this.chip8.v[x];
+    }
 }

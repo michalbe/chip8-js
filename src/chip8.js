@@ -79,6 +79,9 @@ export class Chip8 {
                 this.is_drawing = false;
             }
 
+            if (this.delay_timer > 0) {
+                this.delay_timer--;
+            }
         }, 0);
     }
 
@@ -172,49 +175,10 @@ export class Chip8 {
                 switch (opcode & 0x00FF) {
 
                     case 0x0007: this.cpu.LD_DT(opcode); break;
-
-                    // LD Vx, K
-                    // Fx0A
-                    // Wait for keypress, then store it in Vx.
-                    case 0x000A:
-                        console.log('0x000A');
-                        // var oldKeyDown = this.setKey;
-                        // var self = this;
-
-                        // this.setKey = function (key) {
-                        //     self.v[x] = key;
-
-                        //     self.setKey = oldKeyDown.bind(self);
-                        //     self.setKey.apply(self, arguments);
-
-                        //     self.start();
-                        // }
-
-                        // this.stop();
-                        return;
-
-                    // LD DT, Vx
-                    // Fx15
-                    // DT is set to Vx.
-                    case 0x0015:
-                        console.log('0x0015');
-                        // this.delayTimer = this.v[x];
-                        break;
-
-                    // LD ST, Vx
-                    // Fx18
-                    // Set sound timer to Vx.
-                    case 0x0018:
-                        console.log('0x0018');
-                        // this.soundTimer = this.v[x];
-                        break;
-
-                    // ADD I, Vx
-                    // Fx1E
-                    // Set I equal to I + Vx
-                    case 0x001E:
-                        this.i += this.v[x];
-                        break;
+                    case 0x000A: this.cpu.LD_Vx(opcode); return;
+                    case 0x0015: this.cpu.LD_DT2(opcode); break;
+                    case 0x0018: console.log('0x0018'); break;
+                    case 0x001E: this.cpu.ADD_Vx(opcode); break;
 
                     // LD F, Vx
                     // Fx29
