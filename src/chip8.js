@@ -179,26 +179,8 @@ export class Chip8 {
                     case 0x0015: this.cpu.LD_DT2(opcode); break;
                     case 0x0018: console.log('0x0018'); break;
                     case 0x001E: this.cpu.ADD_Vx(opcode); break;
-
-                    // LD F, Vx
-                    // Fx29
-                    // Set I equal to location of sprite for digit Vx.
-                    case 0x0029:
-                        // Multiply by number of rows per character.
-                        this.i = this.v[x] * 5;
-                        break;
-
-                    // LD B, Vx
-                    // Fx33
-                    // Store BCD representation of Vx in memory location starting at location I.
-                    case 0x0033:
-                        var number = this.v[x], i;
-
-                        for (i = 3; i > 0; i--) {
-                            this.memory[this.i + i - 1] = parseInt(number % 10);
-                            number /= 10;
-                        }
-                        break;
+                    case 0x0029: this.cpu.LD_F_Vx(opcode); break;
+                    case 0x0033: this.cpu.LD_B_Vx(opcode); break;
 
                     // LD [I], Vx
                     // Fx55

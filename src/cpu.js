@@ -209,4 +209,19 @@ export class CPU {
 
         this.chip8.i += this.chip8.v[x];
     }
+
+    LD_F_Vx(opcode) {
+        const x = this.get_x_y(opcode).x;
+        this.chip8.i = this.v[x] * 5;
+    }
+
+    LD_B_Vx(opcode) {
+        const x = this.get_x_y(opcode).x;
+        let number = this.chip8.v[x];
+
+        for (let i = 3; i > 0; i--) {
+            this.chip8.memory[this.chip8.i + i - 1] = parseInt(number % 10);
+            number /= 10;
+        }
+    }
 }
