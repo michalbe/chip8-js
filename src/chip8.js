@@ -1,5 +1,5 @@
-// import { Renderer } from './renderer';
-import { Renderer } from './renderer-ascii';
+import { Renderer } from './renderer';
+// import { Renderer } from './renderer-ascii';
 import { CPU } from './cpu';
 
 const renderer = new Renderer();
@@ -91,8 +91,11 @@ export class Chip8 {
         this.keys[key] = status;
     }
 
+
     start() {
+        this.current_tick = 0;
         setInterval(() => {
+            this.current_tick++;
             this.tick();
 
             if (this.is_drawing) {
@@ -103,8 +106,10 @@ export class Chip8 {
                 this.is_drawing = false;
             }
 
-            if (this.delay_timer > 0) {
-                this.delay_timer--;
+            if (this.current_tick % 6 === 0) {
+                if (this.delay_timer > 0) {
+                    this.delay_timer--;
+                }
             }
         }, 0);
     }
