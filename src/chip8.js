@@ -1,4 +1,5 @@
-import { Renderer } from './renderer';
+// import { Renderer } from './renderer';
+import { Renderer } from './renderer-ascii';
 import { CPU } from './cpu';
 
 const renderer = new Renderer();
