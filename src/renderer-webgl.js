@@ -1,5 +1,5 @@
 import { Game } from 'cervus/core';
-import { Render, Transform, Move } from 'cervus/components';
+import { Render, Transform } from 'cervus/components';
 import { PhongMaterial } from 'cervus/materials';
 import { Box } from 'cervus/shapes';
 
@@ -38,29 +38,19 @@ export class Renderer {
                 this.game.add(box);
                 this.boxes.push(box);
             }
-
-            // this.boxes.reverse();
         }
 
-
-
-
-        const camera_transform = window.camera = this.game.camera.get_component(Transform);
-
+        const camera_transform = this.game.camera.get_component(Transform);
         camera_transform.position = [-3.0333335399627686, -1.0500000715255737, -5.5416693687438965];
-        const light = this.game.light;
-        const light_transform = light.get_component(Transform);
+
+        const light_transform = this.game.light.get_component(Transform);
         light_transform.position = camera_transform.position;
 
     }
 
     draw(pixels) {
-        // return;
-        // let output = '';
         pixels.forEach((pixel, index) => {
             this.boxes[index].skip = !pixel;
         });
-
-        // this.element.innerHTML = output;
     }
 }
