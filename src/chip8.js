@@ -181,24 +181,8 @@ export class Chip8 {
                     case 0x001E: this.cpu.ADD_Vx(opcode); break;
                     case 0x0029: this.cpu.LD_F_Vx(opcode); break;
                     case 0x0033: this.cpu.LD_B_Vx(opcode); break;
-
-                    // LD [I], Vx
-                    // Fx55
-                    // Store registers V0 through Vx in memory starting at location I.
-                    case 0x0055:
-                        for (var i = 0; i <= x; i++) {
-                            this.memory[this.i + i] = this.v[i];
-                        }
-                        break;
-
-                    // LD Vx, [I]
-                    // Fx65
-                    // Read registers V0 through Vx from memory starting at location I.
-                    case 0x0065:
-                        for (var i = 0; i <= x; i++) {
-                            this.v[i] = this.memory[this.i + i];
-                        }
-                        break;
+                    case 0x0055: this.cpu.LD_I_Vx(opcode); break;
+                    case 0x0065: this.cpu.LD_Vx_I(opcode); break;
 
                 }
 

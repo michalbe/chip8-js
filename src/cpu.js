@@ -224,4 +224,20 @@ export class CPU {
             number /= 10;
         }
     }
+
+    LD_I_Vx(opcode) {
+        const x = this.get_x_y(opcode).x;
+
+        for (let i = 0; i <= x; i++) {
+            this.chip8.memory[this.chip8.i + i] = this.chip8.v[i];
+        }
+    }
+
+    LD_Vx_I(opcode) {
+        const x = this.get_x_y(opcode).x;
+
+        for (let i = 0; i <= x; i++) {
+            this.chip8.v[i] = this.chip8.memory[this.chip8.i + i];
+        }
+    }
 }
