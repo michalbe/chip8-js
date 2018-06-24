@@ -14,6 +14,7 @@ export class Renderer {
             width: window.innerWidth,
             height: window.innerHeight,
             light_intensity: 0.1,
+            clear_color: '#000000'
         });
 
         this.material = new PhongMaterial({
@@ -23,17 +24,30 @@ export class Renderer {
             ]
         });
 
-        const box = new Box();
-        const [box_transform, box_render] = box.get_components(Transform, Render);
-        box_render.material = this.material;
-        box_render.color = this.activeColor;
-        box_transform.scale = [0.1, 0.1, 0.1];
-        this.game.add(box);
+        this.boxes = [];
+
+        for (let j = 0; j < this.height; j++) {
+            for (let i = 0; i < this.width; i++) {
+                const box = new Box();
+                const [box_transform, box_render] = box.get_components(Transform, Render);
+                box_render.material = this.material;
+                box_render.color = this.activeColor;
+                box_transform.scale = [0.1, 0.1, 1];
+                box_transform.position = [ -i / 10, - j / 10, 0];
+                box.skip = true;
+                this.game.add(box);
+                this.boxes.push(box);
+            }
+
+            // this.boxes.reverse();
+        }
+
+
+
 
         const camera_transform = window.camera = this.game.camera.get_component(Transform);
 
-        camera_transform.position = [0, 0, -2.741666555404663];
-        // this.game.camera.get_component(Move).keyboard_controlled = true;
+        camera_transform.position = [-3.0333335399627686, -1.0500000715255737, -5.5416693687438965];
         const light = this.game.light;
         const light_transform = light.get_component(Transform);
         light_transform.position = camera_transform.position;
@@ -41,18 +55,11 @@ export class Renderer {
     }
 
     draw(pixels) {
+        // return;
         // let output = '';
-        // pixels.forEach((pixel, index) => {
-        //     if (pixel) {
-        //         output += '@';
-        //     } else {
-        //         output += '&nbsp;';
-        //     }
-
-        //     if (index % this.width === 0) {
-        //         output += '<br/>';
-        //     }
-        // });
+        pixels.forEach((pixel, index) => {
+            this.boxes[index].skip = !pixel;
+        });
 
         // this.element.innerHTML = output;
     }
