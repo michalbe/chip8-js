@@ -95,7 +95,7 @@ export class CPU {
         const { x, y } = this.get_x_y(opcode);
 
         this.chip8.v[0xF] = +(this.chip8.v[x] > this.chip8.v[y]);
-        this.chip8.v[x] -= this.v[y];
+        this.chip8.v[x] -= this.chip8.v[y];
         if (this.chip8.v[x] < 0) {
             this.chip8.v[x] += 256;
         }

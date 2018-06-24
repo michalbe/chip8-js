@@ -3,6 +3,8 @@ import { CPU } from './cpu';
 
 const renderer = new Renderer();
 
+const key_maps = '1234qwerasdfzxcv'.split('');
+
 export class Chip8 {
     constructor() {
         this.display = {
@@ -18,7 +20,28 @@ export class Chip8 {
             chip8: this
         });
 
-        this.keys = {};
+        this.keys = key_maps.reduce((memo, curr, ind) => {
+            memo[ind] = false;
+            return memo;
+        }, {});
+
+        document.addEventListener('keydown', (e) => {
+            const key = e.key;
+            const key_index = key_maps.indexOf(key);
+
+            if (key_index) {
+                this.keys[key_index] = true;
+            }
+        });
+
+        document.addEventListener('keyup', (e) => {
+            const key = e.key;
+            const key_index = key_maps.indexOf(key);
+
+            if (key_index) {
+                this.keys[key_index] = false;
+            }
+        });
     }
 
     load_program(program) {
