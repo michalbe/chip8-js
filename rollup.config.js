@@ -16,12 +16,6 @@ export default {
       customResolveOptions: {
         moduleDirectory: 'node_modules'
       }
-    }),
-    serve({
-      contentBase: ['dist']
-    }),
-    livereload({
-      watch: ['dist']
     })
   ],
   dest: 'dist/index.js'
