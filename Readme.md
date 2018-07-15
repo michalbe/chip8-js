@@ -4,11 +4,11 @@ Chip8
 My first attempt to write an emulator. It supports three basic renderers:
 
 ### Pixel based 2d canvas
-![screens/canvas-renderer.gif](canvas)
+![canvas](screens/canvas-renderer.gif)
 
-### ASCII renderer with spaces and `@`s
-![screens/ascii-renderer.gif](ascii)
+### HTML based ASCII renderer
+![ascii](screens/ascii-renderer.gif)
 
 ### Voxel WebGL renderer with [Cervus](https://github.com/michalbe/cervus)
-![screens/webgl-renderer.gif](webgl)
+![webgl](screens/webgl-renderer.gif)
 
