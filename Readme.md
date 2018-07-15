@@ -18,3 +18,8 @@ It supports three basic renderers:
 ### Voxel WebGL renderer with [Cervus](https://github.com/michalbe/cervus)
 ![webgl](screens/webgl-renderer.gif)
 
+## Try me!
+Try `Space invaders` game [online](https://michalbe.github.io/chip8-js/index.html). Controls:
+  - `Q` Left
+  - `W` Fire
+  - `E` Right
