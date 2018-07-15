@@ -1,6 +1,7 @@
 export class Renderer {
     constructor() {
         this.element = document.createElement('canvas');
+        this.element.id = "canvas-renderer";
         this.ctx = this.element.getContext('2d');
         this.element.width = 64;
         this.element.height = 32;

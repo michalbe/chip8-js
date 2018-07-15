@@ -1,5 +1,7 @@
 import { Rom } from './rom';
 import { Chip8 } from './chip8';
+// import { Renderer } from './renderer-ascii';
+// import { Renderer } from './renderer-webgl';
 import { Renderer } from './renderer';
 
 const renderer = new Renderer();
