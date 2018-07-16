@@ -8,7 +8,7 @@ My first attempt to write an emulator.
 
 ## Renderers
 
-It supports three basic renderers:
+`Chip-8-js` supports three basic renderers:
 ### Pixel based 2d canvas
 ![canvas](screens/canvas-renderer.gif)
 
@@ -23,3 +23,15 @@ Try `Space invaders` game [online](https://michalbe.github.io/chip8-js/index.htm
   - `Q` Left
   - `W` Fire
   - `E` Right
+
+## Moar roms
+Download more public domain CHIP-8 games [here](https://www.zophar.net/pdroms/chip8.html)
+
+## Run localy
+
+```
+npm i
+npm run dev
+```
+and point your browser to http://localhost:10001. Renderers can be easily changed in `src/main.js`.
+
