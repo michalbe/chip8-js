@@ -13,7 +13,7 @@ export class Chip8 {
             content: []
         };
 
-        this.memory = window.memory = new Uint8Array(new ArrayBuffer(0x1000));
+        this.memory = new Uint8Array(new ArrayBuffer(0x1000));
         this.reset();
 
         this.cpu = new CPU({
@@ -52,7 +52,7 @@ export class Chip8 {
     }
 
     reset() {
-        this.memory = this.memory.map(() => 0);
+        this.memory = this.memory.fill(0);
 
         // program pointer
         this.pc = 0x200;
@@ -136,7 +136,6 @@ export class Chip8 {
 
     tick() {
         const opcode = this.memory[this.pc] << 8 | this.memory[this.pc + 1];
-        let x = (opcode & 0x0F00) >> 8;
         let y = (opcode & 0x00F0) >> 4;
         const instruction = opcode & 0xf000;
 
