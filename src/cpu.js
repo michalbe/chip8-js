@@ -212,7 +212,7 @@ export class CPU {
 
     LD_F_Vx(opcode) {
         const x = this.get_x_y(opcode).x;
-        this.chip8.i = this.v[x] * 5;
+        this.chip8.i = this.chip8.v[x] * 5;
     }
 
     LD_B_Vx(opcode) {
